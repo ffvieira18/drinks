@@ -1,0 +1,43 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="{% static 'css\bootstrap.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'css\personalized\style.css' %}" rel="stylesheet" type="text/css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div class="">
+        <form action="{% url 'send_rins_file' %}" enctype="multipart/form-data" method="post" class="form-horizontal ws-validate">
+              {% csrf_token %}  
+            
+            <fieldset>
+                  <legend>Legend</legend>
+                  <div class="container">
+                        <div class="page-header">
+                            <h1>Demo <small>Drag and drop a directory on file input with <em>webkitdirectory</em></small></h1>
+                        </div>
+                        
+                        <div class="row">
+                          <div id="fileHolder">
+                              <div class="folder-icon"></div>
+                    <input type="file" multiple webkitdirectory id="fileURL" name='file_received'/>   
+                    <input type="text" name="folder_name" value="" >
+                            </div>
+                     <div class="row">
+                    <h4>Files to upload:</h4>
+                     <ul id="fileOutput">
+                     </ul>
+                     <input type="submit" class="btn btn-primary"></button>
+                    </div>     
+                    </div>
+                      </div>     
+                <fieldset>
+              </form>
+            </div>
+            <script src="{% static 'js\personalized\main.js' %}"></script>
+</body>
+</html>

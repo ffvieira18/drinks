@@ -1,0 +1,63 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap 3: Layouts</title>
+
+    <link href="{% static 'css\bootstrap.min.css' %}" rel="stylesheet">
+
+</head>
+<body>
+    <form action="">
+        <input type="hidden" id='folder' value='{{folder}}'>
+
+    </form>
+    <div class="container">
+        <h3>Proteinas:</h3>
+        {% for i in files %}
+            <button id="{{ i }}" class="prot">{{ i }}</button> 
+        {% endfor %}
+
+        <hr>
+
+        <h4>Aminoacidos:</h4>
+        <pre>
+            <div class="row"> 
+                {% for i in '0123456789' %}
+                    
+                    <button style="margin-left:15px;">{{ i }}</button>
+                    
+                {% endfor %}
+            </div>
+        </pre>
+    </div>
+</body>
+<script src="{% static 'js/jquery.js' %}"></script>
+<script>
+
+    var all_prot = document.getElementsByClassName('prot');
+    for(prot of all_prot){
+        prot.addEventListener('click',function(e){
+            e.preventDefault();
+            var folder = $('#folder').val();
+            var amino = this.id;
+            console.log(amino, folder );
+
+            $.ajax({
+                url:'http://127.0.0.1:8000/index/amino/'+folder+'/'+amino,
+                dataType: 'json',
+                type: 'POST',
+                success:function(result){
+                    console.log(result);
+                }
+            });
+            
+        });
+    }
+
+</script>
+<script src="js\bootstrap.min.js"></script>
+</html>
